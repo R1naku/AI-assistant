@@ -1,9 +1,0 @@
-numpy
-sounddevice
-keyboard
-openai-whisper
-torch
-webrtcvad
-requests
-colorama
-gTTS
