@@ -43,4 +43,4 @@ def get_db():
 def init_db():
     """Создает все таблицы в базе данных"""
     Base.metadata.create_all(bind=engine)
-    print("✅ База данных инициализирована")
+    print("db application")
