@@ -30,7 +30,7 @@ draft = InBoxAgent().generate_draft_response(
     body,
     category=classification.get("category", "general_question")
 )
-print(f"📝 Черновик ответа:\n{draft}")
+print(f"Черновик ответа:\n{draft}")
 print("-" * 50)
 
 if __name__ == "__main__":
