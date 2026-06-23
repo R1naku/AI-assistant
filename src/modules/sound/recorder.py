@@ -1,4 +1,5 @@
 import time
+from pathlib import Path
 from queue import Empty, Queue
 
 import numpy as np
@@ -6,10 +7,14 @@ import sounddevice as sd
 from config import CHANNELS, DTYPE, SAMPLE_RATE, SEGMENT_SAMPLES, SILENCE_TIMEOUT
 from infostructure.ai.llm import generate_response
 from infostructure.ai.whisper_stt import transcribe
+from modules.rag.modules.application import RAGApplication
 from modules.sound.vad import is_speech
 from modules.ui.console import print_assistant, print_user
 
 audio_queue = Queue()
+knowledge_dir = Path(__file__).resolve().parents[2] / "knowledge"
+knowledge_dir.mkdir(exist_ok=True)
+rag_app = RAGApplication(source_paths=[knowledge_dir], chunk_size=100)
 
 
 def callback(indata, frames, time_info, status):
@@ -78,9 +83,9 @@ def process_speech(chunks):
     print_user(text)
 
     try:
-        answer = generate_response(text)
+        answer = rag_app.answer(text)
     except Exception as exc:
-        print_assistant(f"error LLM: {exc}")
+        print_assistant(f"error RAG/LLM: {exc}")
         return
 
     print_assistant(answer)
