@@ -6,7 +6,7 @@ from modules.ui.console import print_assistant
 
 
 if __name__ == "__main__":
-    print_assistant("Ассистент запущен")
+    print_assistant("assistant running")
 
     threading.Thread(
         target=start_microphone,

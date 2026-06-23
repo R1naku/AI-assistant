@@ -16,8 +16,8 @@ def _load_model():
     if _model is None:
         if _whisper is None:
             raise RuntimeError(
-                "OpenAI Whisper не доступен. Установите пакет openai-whisper и удалите конфликтующий пакет whisper. "
-                f"Ошибка: {whisper_import_error}"
+                "OpenAI Whisper is not available. Install the openai-whisper package and remove the conflicting whisper package.. "
+                f"error: {whisper_import_error}"
             )
 
         _model = _whisper.load_model(WHISPER_MODEL, device="cpu")
@@ -27,7 +27,7 @@ def _load_model():
 
 def transcribe(audio_data):
     if not isinstance(audio_data, np.ndarray):
-        raise TypeError("Audio data must be a NumPy array of int16 samples.")
+        raise TypeError("audio data must be a NumPy array of int16 samples.")
 
     if audio_data.dtype != np.int16:
         audio_data = audio_data.astype(np.int16)

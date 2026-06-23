@@ -4,13 +4,13 @@ import time
 
 def print_user(text):
     print(
-        f"{Fore.BLUE}Вы:{Style.RESET_ALL} {text}"
+        f"{Fore.WHITE}You:{Style.RESET_ALL} {text}"
     )
 
 
 def print_assistant(text):
     print(
-        f"{Fore.GREEN}Ассистент:{Style.RESET_ALL} {text}"
+        f"{Fore.RED}assistant:{Style.RESET_ALL} {text}"
     )
 
 

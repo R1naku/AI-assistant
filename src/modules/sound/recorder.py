@@ -14,13 +14,13 @@ audio_queue = Queue()
 
 def callback(indata, frames, time_info, status):
     if status:
-        print_assistant(f"Audio callback status: {status}")
+        print_assistant(f"audio callback status: {status}")
 
     audio_queue.put(indata.copy())
 
 
 def start_microphone():
-    print_assistant("Голосовой ассистент слушает...")
+    print_assistant("voice assistant is listening")
 
     with sd.InputStream(
         samplerate=SAMPLE_RATE,
@@ -68,11 +68,11 @@ def process_speech(chunks):
     try:
         text = transcribe(audio_data)
     except Exception as exc:
-        print_assistant(f"Ошибка транскрипции: {exc}")
+        print_assistant(f"error transcription: {exc}")
         return
 
     if not text:
-        print_assistant("Не удалось распознать речь.")
+        print_assistant("recognition failed")
         return
 
     print_user(text)
@@ -80,7 +80,7 @@ def process_speech(chunks):
     try:
         answer = generate_response(text)
     except Exception as exc:
-        print_assistant(f"Ошибка LLM: {exc}")
+        print_assistant(f"error LLM: {exc}")
         return
 
     print_assistant(answer)
